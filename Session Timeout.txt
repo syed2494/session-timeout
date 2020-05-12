@@ -1,0 +1,29 @@
+component
+<aura:handler name="init" value="{!this}" action="{!c.SessionTimeOut}"/>
+
+
+-----------------
+Controller
+SessionTimeOut : function(component, event, helper) {
+        var time;
+        resetTimer();
+        window.onmousemove = resetTimer;
+        window.onkeypress = resetTimer;
+        window.ontouchstart = resetTimer;
+        window.onclick = resetTimer; 
+        window.addEventListener('scroll', resetTimer, true); // improved; see comments
+        
+        function logout() {
+     
+            alert("Oops! Your session has expired. Please login again to continue.")
+            window.location = '/apex/vflight'
+         
+           
+        }
+        
+        
+        function resetTimer() {
+            clearTimeout(time);
+            time = setTimeout(logout,300000);  // time is in milliseconds
+        }
+            
